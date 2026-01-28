@@ -3,8 +3,8 @@
 interface
 
 uses
-  Winapi.Windows, System.SysUtils, System.Generics.Collections, System.IOUtils,
-  Vcl.Forms, ShellAPI;
+  Winapi.Windows, System.StrUtils, System.SysUtils, System.Generics.Collections,
+  System.IOUtils, Vcl.Forms, ShellAPI;
 
 procedure UI_Init(AForm: TObject);
 
@@ -184,19 +184,11 @@ begin
   F.lblLanguageW.Caption := Info.LanguageName;
   F.lblNativeDisplayNameW.Caption := Info.NativeDisplayName;
 
-  if Info.NLCID = 0 then
-    F.lblLanguageIDW.Caption := 'N/A'
-  else
-    F.lblLanguageIDW.Caption := Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)]);
-
-  if Info.CodePage = '' then
-    F.lblCodePageW.Caption := 'N/A'
-  else
-    F.lblCodePageW.Caption := Info.CodePage;
-
-  F.lblBCP47W.Caption := Info.BCP47;
-  F.lblISO6391W.Caption := Info.ISO6391;
-  F.lblISO31661W.Caption := Info.ISO31661;
+  F.lblLanguageIDW.Caption := IfThen(Info.NLCID = 0, SNotAvailable, Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)]));
+  F.lblCodePageW.Caption := IfThen(Info.CodePage = '', SNotAvailable, Info.CodePage);
+  F.lblBCP47W.Caption := IfThen(Info.BCP47 = '', SNotAvailable, Info.BCP47);
+  F.lblISO6391W.Caption := IfThen(Info.ISO6391 = '', SNotAvailable, Info.ISO6391);
+  F.lblISO31661W.Caption := IfThen(Info.ISO31661 = '', SNotAvailable, Info.ISO31661);
 
   F.lblShortDateFormatW.Caption := Info.ShortDateFormat;
   F.lblLongDateFormatW.Caption := Info.LongDateFormat;

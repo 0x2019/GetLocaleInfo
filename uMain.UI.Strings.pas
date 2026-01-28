@@ -8,6 +8,8 @@ resourcestring
   APP_RELEASE                         = 'January 21, 2026';
   APP_URL                             = 'https://github.com/0x2019/GetLocaleInfo';
 
+  SNotAvailable                       = 'N/A';
+
   SFileSavedMsg                       = 'File successfully saved!' + sLineBreak + 'Path: %s';
   SFileSaveErrMsg                     = 'Failed to save the file.' + sLineBreak + 'Path: %s' + sLineBreak + '%s';
 
