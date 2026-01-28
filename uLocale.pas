@@ -18,6 +18,7 @@ type
     NativeDisplayName: string;
     LanguageName: string;
     NLCID: LCID;
+    CodePage: string;
     BCP47: string;
     ISO6391: string;
     ISO31661: string;
@@ -100,6 +101,9 @@ begin
 end;
 
 function GetLocaleInfo(const LocaleName: string): TLocaleInfo;
+var
+  CodePageValue: Integer;
+  CodePageInfo: TCPInfoEx;
 begin
   Result.CountryName := GetLocaleInfoExS(LocaleName, LOCALE_SLOCALIZEDCOUNTRYNAME);
   if Result.CountryName = '' then
@@ -109,6 +113,14 @@ begin
   Result.NativeDisplayName := GetLocaleInfoExS(LocaleName, LOCALE_SNATIVEDISPLAYNAME);
   Result.LanguageName := GetLocaleInfoExS(LocaleName, LOCALE_SLOCALIZEDLANGUAGENAME);
   Result.NLCID := LocaleNameToLCID(PChar(LocaleName), LOCALE_ALLOW_NEUTRAL_NAMES);
+  Result.CodePage := GetLocaleInfoExS(LocaleName, LOCALE_IDEFAULTANSICODEPAGE);
+
+  if TryStrToInt(Result.CodePage, CodePageValue) and
+    GetCPInfoEx(CodePageValue, 0, CodePageInfo) then
+    Result.CodePage := CodePageInfo.CodePageName
+  else
+    Result.CodePage := '';
+
   Result.BCP47 := LocaleName;
   Result.ISO6391 := GetLocaleInfoExS(LocaleName, LOCALE_SISO639LANGNAME);
   Result.ISO31661 := GetLocaleInfoExS(LocaleName, LOCALE_SISO3166CTRYNAME);

@@ -51,6 +51,8 @@ type
     sCharImageList: TsCharImageList;
     sSaveDlg: TsSaveDialog;
     btnSave: TsBitBtn;
+    lblCodePageR: TsLabel;
+    lblCodePageW: TsLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);

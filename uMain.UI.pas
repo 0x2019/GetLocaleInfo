@@ -56,6 +56,7 @@ begin
     F.lblLanguageR.Caption + ' ' + F.lblLanguageW.Caption + sLineBreak +
     F.lblCountryCodeR.Caption + ' ' + F.lblCountryCodeW.Caption + sLineBreak +
     F.lblLanguageIDR.Caption + ' ' + F.lblLanguageIDW.Caption + sLineBreak +
+    F.lblCodePageR.Caption + ' ' + F.lblCodePageW.Caption + sLineBreak +
     F.lblBCP47R.Caption + ' ' + F.lblBCP47W.Caption + sLineBreak +
     F.lblISO6391R.Caption + ' ' + F.lblISO6391W.Caption + sLineBreak +
     F.lblISO31661R.Caption + ' ' + F.lblISO31661W.Caption + sLineBreak +
@@ -187,6 +188,11 @@ begin
     F.lblLanguageIDW.Caption := 'N/A'
   else
     F.lblLanguageIDW.Caption := Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)]);
+
+  if Info.CodePage = '' then
+    F.lblCodePageW.Caption := 'N/A'
+  else
+    F.lblCodePageW.Caption := Info.CodePage;
 
   F.lblBCP47W.Caption := Info.BCP47;
   F.lblISO6391W.Caption := Info.ISO6391;

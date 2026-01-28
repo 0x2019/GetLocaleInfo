@@ -4,7 +4,7 @@ object frmMain: TfrmMain
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'GetLocaleInfo'
-  ClientHeight = 368
+  ClientHeight = 384
   ClientWidth = 399
   Color = clBtnFace
   DoubleBuffered = True
@@ -156,7 +156,7 @@ object frmMain: TfrmMain
     Left = 3
     Top = 60
     Width = 393
-    Height = 277
+    Height = 293
     TabOrder = 1
     object lblCountryR: TsLabel
       Left = 69
@@ -188,21 +188,21 @@ object frmMain: TfrmMain
     end
     object lblBCP47R: TsLabel
       Left = 74
-      Top = 115
+      Top = 134
       Width = 38
       Height = 13
       Caption = 'BCP 47:'
     end
     object lblISO31661R: TsLabel
       Left = 53
-      Top = 153
+      Top = 172
       Width = 59
       Height = 13
       Caption = 'ISO 3166-1:'
     end
     object lblISO6391R: TsLabel
       Left = 59
-      Top = 134
+      Top = 153
       Width = 53
       Height = 13
       Caption = 'ISO 639-1:'
@@ -231,21 +231,21 @@ object frmMain: TfrmMain
     end
     object lblBCP47W: TsLabel
       Left = 118
-      Top = 115
+      Top = 134
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblISO6391W: TsLabel
       Left = 118
-      Top = 134
+      Top = 153
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblISO31661W: TsLabel
       Left = 118
-      Top = 153
+      Top = 172
       Width = 16
       Height = 13
       Caption = '%s'
@@ -273,73 +273,87 @@ object frmMain: TfrmMain
     end
     object lblShortDateFormatW: TsLabel
       Left = 118
-      Top = 172
+      Top = 191
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblShortDateFormatR: TLabel
       Left = 25
-      Top = 172
+      Top = 191
       Width = 87
       Height = 13
       Caption = 'ShortDateFormat:'
     end
     object lblLongDateFormatW: TsLabel
       Left = 118
-      Top = 191
+      Top = 210
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblLongDateFormatR: TsLabel
       Left = 28
-      Top = 191
+      Top = 210
       Width = 84
       Height = 13
       Caption = 'LongDateFormat:'
     end
     object lblTimeFormatR: TsLabel
       Left = 52
-      Top = 210
+      Top = 229
       Width = 60
       Height = 13
       Caption = 'TimeFormat:'
     end
     object lblTimeFormatW: TsLabel
       Left = 118
-      Top = 210
+      Top = 229
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblCurrencySymbolR: TsLabel
       Left = 30
-      Top = 229
+      Top = 248
       Width = 82
       Height = 13
       Caption = 'CurrencySymbol:'
     end
     object lblCurrencySymbolW: TsLabel
       Left = 118
-      Top = 229
+      Top = 248
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblCurrencyIntlSymbolW: TsLabel
       Left = 118
-      Top = 248
+      Top = 267
       Width = 16
       Height = 13
       Caption = '%s'
     end
     object lblCurrencyIntlSymbolR: TsLabel
       Left = 14
-      Top = 248
+      Top = 267
       Width = 98
       Height = 13
       Caption = 'CurrencyIntlSymbol:'
+    end
+    object lblCodePageR: TsLabel
+      Left = 59
+      Top = 115
+      Width = 53
+      Height = 13
+      Caption = 'CodePage:'
+    end
+    object lblCodePageW: TsLabel
+      Left = 118
+      Top = 115
+      Width = 16
+      Height = 13
+      Caption = '%s'
     end
   end
   object grpLocale: TsGroupBox
@@ -368,7 +382,7 @@ object frmMain: TfrmMain
   end
   object btnAbout: TsBitBtn
     Left = 190
-    Top = 343
+    Top = 359
     Width = 100
     Height = 25
     Caption = '&About'
@@ -383,7 +397,7 @@ object frmMain: TfrmMain
   end
   object btnExit: TsBitBtn
     Left = 296
-    Top = 343
+    Top = 359
     Width = 100
     Height = 25
     Caption = 'E&xit'
@@ -398,7 +412,7 @@ object frmMain: TfrmMain
   end
   object btnSave: TsBitBtn
     Left = 84
-    Top = 343
+    Top = 359
     Width = 100
     Height = 25
     Caption = '&Save...'
