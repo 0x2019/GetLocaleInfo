@@ -83,7 +83,7 @@ begin
     except
       on E: Exception do
       begin
-        UI_MessageBox(F, Format(SFileSaveErrMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
+        UI_MessageBox(F, Format(SFileSaveFailMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
         Exit;
       end;
     end;

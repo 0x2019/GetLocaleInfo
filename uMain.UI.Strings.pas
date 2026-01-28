@@ -11,7 +11,7 @@ resourcestring
   SNotAvailable                       = 'N/A';
 
   SFileSavedMsg                       = 'File successfully saved!' + sLineBreak + 'Path: %s';
-  SFileSaveErrMsg                     = 'Failed to save the file.' + sLineBreak + 'Path: %s' + sLineBreak + '%s';
+  SFileSaveFailMsg                    = 'Failed to save the file.' + sLineBreak + 'Path: %s' + sLineBreak + '%s';
 
   SOpenFileMsg                        = 'Would you like to open the file now?';
   SOpenFileFailMsg                    = 'Failed to open the file.';
