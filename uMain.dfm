@@ -2375,6 +2375,7 @@ object frmMain: TfrmMain
     MenuSupport.Font.Height = -11
     MenuSupport.Font.Name = 'Segoe UI'
     MenuSupport.Font.Style = []
+    SkinDirectory = 'c:\Skins'
     SkinName = 'Fluent Night (internal)'
     SkinInfo = '15'
     ThirdParty.ThirdEdits = ' '#13#10
@@ -2432,7 +2433,9 @@ object frmMain: TfrmMain
   end
   object sSaveDlg: TsSaveDialog
     DefaultExt = 'txt'
-    Filter = 'Text files (*.txt)|*.txt|All files (*.*)|*.*'
+    Filter = 
+      'Text files (*.txt)|*.txt|CSV files (*.csv)|*.csv|JSON files (*.j' +
+      'son)|*.json|All files (*.*)|*.*'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 320
     Top = 216

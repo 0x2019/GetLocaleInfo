@@ -7,7 +7,8 @@ uses
   uLocale in 'uLocale.pas',
   uMain.UI in 'uMain.UI.pas',
   uMain.UI.Messages in 'uMain.UI.Messages.pas',
-  uMain.UI.Strings in 'uMain.UI.Strings.pas';
+  uMain.UI.Strings in 'uMain.UI.Strings.pas',
+  uExport in 'uExport.pas';
 
 var
   uMutex: THandle;

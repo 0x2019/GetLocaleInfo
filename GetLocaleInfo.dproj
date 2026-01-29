@@ -136,6 +136,7 @@
         <DCCReference Include="uMain.UI.pas"/>
         <DCCReference Include="uMain.UI.Messages.pas"/>
         <DCCReference Include="uMain.UI.Strings.pas"/>
+        <DCCReference Include="uExport.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

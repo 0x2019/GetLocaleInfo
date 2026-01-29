@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, System.StrUtils, System.SysUtils, System.Generics.Collections,
-  System.IOUtils, Vcl.Forms, ShellAPI;
+  Vcl.Forms;
 
 procedure UI_Init(AForm: TObject);
 
@@ -21,7 +21,7 @@ procedure UI_UpdateLocaleInfo(AForm: TObject; const LocaleName: string);
 implementation
 
 uses
-  uLocale, uMain, uMain.UI.Messages, uMain.UI.Strings;
+  uExport, uLocale, uMain, uMain.UI.Messages, uMain.UI.Strings;
 
 procedure UI_Init(AForm: TObject);
 var
@@ -63,60 +63,38 @@ procedure UI_Save(AForm: TObject);
 var
   F: TfrmMain;
   FileName: string;
-  Enc: TEncoding;
-  S: string;
+  Ext: string;
+  FilterIndex: Integer;
 begin
   if not (AForm is TfrmMain) then Exit;
   F := TfrmMain(AForm);
 
   if not Assigned(F.sSaveDlg) then Exit;
 
-  S :=
-    F.lblLocale.Caption + ' ' + F.cbLocale.Text + sLineBreak +
-    F.lblCountryR.Caption + ' ' + F.lblCountryW.Caption + sLineBreak +
-    F.lblLanguageR.Caption + ' ' + F.lblLanguageW.Caption + sLineBreak +
-    F.lblCountryCodeR.Caption + ' ' + F.lblCountryCodeW.Caption + sLineBreak +
-    F.lblLanguageIDR.Caption + ' ' + F.lblLanguageIDW.Caption + sLineBreak +
-    F.lblCodePageR.Caption + ' ' + F.lblCodePageW.Caption + sLineBreak +
-    F.lblBCP47R.Caption + ' ' + F.lblBCP47W.Caption + sLineBreak +
-    F.lblISO6391R.Caption + ' ' + F.lblISO6391W.Caption + sLineBreak +
-    F.lblISO31661R.Caption + ' ' + F.lblISO31661W.Caption + sLineBreak +
-    F.lblNativeDisplayNameR.Caption + ' ' + F.lblNativeDisplayNameW.Caption + sLineBreak +
-    F.lblShortDateFormatR.Caption + ' ' + F.lblShortDateFormatW.Caption + sLineBreak +
-    F.lblLongDateFormatR.Caption + ' ' + F.lblLongDateFormatW.Caption + sLineBreak +
-    F.lblTimeFormatR.Caption + ' ' + F.lblTimeFormatW.Caption + sLineBreak +
-    F.lblCurrencySymbolR.Caption + ' ' + F.lblCurrencySymbolW.Caption + sLineBreak +
-    F.lblCurrencyIntlSymbolR.Caption + ' ' + F.lblCurrencyIntlSymbolW.Caption + sLineBreak;
-
-  if Trim(S) = '' then Exit;
-
-  F.sSaveDlg.FileName := Format('GLI_%s.txt', [FormatDateTime('yyyymmdd_hhnnss', Now)]);
+  F.sSaveDlg.FilterIndex := 1;
+  F.sSaveDlg.FileName := Format('GLI_%s', [FormatDateTime('yyyymmdd_hhnnss', Now)]);
   if not F.sSaveDlg.Execute then Exit;
 
   FileName := F.sSaveDlg.FileName;
-  if ExtractFileExt(FileName) = '' then
-    FileName := FileName + '.txt';
-
-  Enc := TUTF8Encoding.Create(False);
-  try
-    try
-      TFile.WriteAllText(FileName, S, Enc);
-    except
-      on E: Exception do
-      begin
-        UI_MessageBox(F, Format(SFileSaveFailMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
-        Exit;
-      end;
-    end;
-  finally
-    Enc.Free;
-  end;
-
-  if UI_ConfirmYesNo(F, Format(SFileSavedMsg, [FileName]) + sLineBreak + sLineBreak + SOpenFileMsg) then
+  Ext := LowerCase(ExtractFileExt(FileName));
+  if Ext = '' then
   begin
-    if ShellExecute(0, 'open', PChar(FileName), nil, nil, SW_SHOWNORMAL) <= 32 then
-      UI_MessageBox(F, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
+    FilterIndex := F.sSaveDlg.FilterIndex;
+    case FilterIndex of
+      2: Ext := '.csv';
+      3: Ext := '.json';
+    else
+      Ext := '.txt';
+    end;
+    FileName := FileName + Ext;
   end;
+
+  if Ext = '.csv' then
+    ExportCSV(F, FileName)
+  else if Ext = '.json' then
+    ExportJSON(F, FileName)
+  else
+    ExportText(F, FileName);
 end;
 
 procedure UI_About(AForm: TObject);
