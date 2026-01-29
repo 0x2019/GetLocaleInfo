@@ -76,25 +76,25 @@ begin
   if not F.sSaveDlg.Execute then Exit;
 
   FileName := F.sSaveDlg.FileName;
-  Ext := LowerCase(ExtractFileExt(FileName));
-  if Ext = '' then
-  begin
-    FilterIndex := F.sSaveDlg.FilterIndex;
-    case FilterIndex of
-      2: Ext := '.csv';
-      3: Ext := '.json';
-    else
-      Ext := '.txt';
-    end;
-    FileName := FileName + Ext;
+  FilterIndex := F.sSaveDlg.FilterIndex;
+  case FilterIndex of
+    2: Ext := '.csv';
+    3: Ext := '.json';
+  else
+    Ext := '.txt';
   end;
 
-  if Ext = '.csv' then
-    ExportCSV(F, FileName)
-  else if Ext = '.json' then
-    ExportJSON(F, FileName)
+  if ExtractFileExt(FileName) = '' then
+    FileName := FileName + Ext
+  else
+    FileName := ChangeFileExt(FileName, Ext);
+
+  case FilterIndex of
+    2: ExportCSV(F, FileName);
+    3: ExportJSON(F, FileName);
   else
     ExportText(F, FileName);
+  end;
 end;
 
 procedure UI_About(AForm: TObject);
