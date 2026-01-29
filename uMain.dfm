@@ -381,46 +381,59 @@ object frmMain: TfrmMain
     end
   end
   object btnAbout: TsBitBtn
-    Left = 190
+    Left = 222
     Top = 359
-    Width = 100
+    Width = 84
     Height = 25
     Caption = '&About'
     ImageIndex = 1
     Images = sCharImageList
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 3
+    TabOrder = 4
     TabStop = False
     OnClick = btnAboutClick
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object btnExit: TsBitBtn
-    Left = 296
+    Left = 312
     Top = 359
-    Width = 100
+    Width = 84
     Height = 25
     Caption = 'E&xit'
     ImageIndex = 2
     Images = sCharImageList
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 5
     TabStop = False
     OnClick = btnExitClick
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object btnSave: TsBitBtn
-    Left = 84
+    Left = 132
     Top = 359
-    Width = 100
+    Width = 84
     Height = 25
     Caption = '&Save...'
     ImageIndex = 0
     Images = sCharImageList
-    TabOrder = 2
+    TabOrder = 3
     TabStop = False
     OnClick = btnSaveClick
+    SkinData.SkinSection = 'SPEEDBUTTON'
+  end
+  object btnDefault: TsBitBtn
+    Left = 42
+    Top = 359
+    Width = 84
+    Height = 25
+    Caption = '&Default'
+    ImageIndex = 3
+    Images = sCharImageList
+    TabOrder = 2
+    TabStop = False
+    OnClick = btnDefaultClick
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object sSkinProvider: TsSkinProvider
@@ -2362,7 +2375,6 @@ object frmMain: TfrmMain
     MenuSupport.Font.Height = -11
     MenuSupport.Font.Name = 'Segoe UI'
     MenuSupport.Font.Style = []
-    SkinDirectory = 'c:\Skins'
     SkinName = 'Fluent Night (internal)'
     SkinInfo = '15'
     ThirdParty.ThirdEdits = ' '#13#10
@@ -2409,6 +2421,10 @@ object frmMain: TfrmMain
       item
         ScalingFactor = 0.800000000000000000
         Char = 61584
+      end
+      item
+        ScalingFactor = 0.800000000000000000
+        Char = 61666
       end>
     Left = 317
     Top = 167

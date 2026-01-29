@@ -8,6 +8,7 @@ uses
 
 procedure UI_Init(AForm: TObject);
 
+procedure UI_Default(AForm: TObject);
 procedure UI_Save(AForm: TObject);
 procedure UI_About(AForm: TObject);
 procedure UI_Exit(AForm: TObject);
@@ -36,6 +37,26 @@ begin
   F.grpInfo.OnMouseDown := F.DragForm;
 
   SetWindowPos(F.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE or SWP_NOSIZE);
+end;
+
+procedure UI_Default(AForm: TObject);
+var
+  F: TfrmMain;
+  SysLocale: string;
+  Idx: Integer;
+begin
+  if not (AForm is TfrmMain) then Exit;
+  F := TfrmMain(AForm);
+
+  if (F.FLocales = nil) or (F.FLocales.Count = 0) then Exit;
+
+  SysLocale := GetUserDefaultLocaleNameS;
+  Idx := FindLocaleIndex(F.FLocales, SysLocale);
+  if Idx < 0 then
+    Idx := 0;
+
+  F.cbLocale.ItemIndex := Idx;
+  UI_LocaleChange(F);
 end;
 
 procedure UI_Save(AForm: TObject);

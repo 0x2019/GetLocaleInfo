@@ -53,12 +53,14 @@ type
     btnSave: TsBitBtn;
     lblCodePageR: TsLabel;
     lblCodePageW: TsLabel;
+    btnDefault: TsBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);
     procedure btnExitClick(Sender: TObject);
     procedure btnAboutClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
+    procedure btnDefaultClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -102,6 +104,11 @@ end;
 procedure TfrmMain.btnAboutClick(Sender: TObject);
 begin
   UI_About(Self);
+end;
+
+procedure TfrmMain.btnDefaultClick(Sender: TObject);
+begin
+  UI_Default(Self);
 end;
 
 procedure TfrmMain.btnExitClick(Sender: TObject);
