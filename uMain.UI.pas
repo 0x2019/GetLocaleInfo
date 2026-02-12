@@ -3,12 +3,14 @@
 interface
 
 uses
-  Winapi.Windows, System.StrUtils, System.SysUtils, System.Generics.Collections,
-  Vcl.Forms;
+  Winapi.Windows, System.Classes, System.StrUtils, System.SysUtils,
+  System.Generics.Collections, Vcl.Forms, Vcl.Menus, Vcl.StdCtrls, Clipbrd;
 
 procedure UI_Init(AForm: TObject);
 
 procedure UI_Default(AForm: TObject);
+procedure UI_Copy(AForm: TObject);
+procedure UI_CopyPM(Sender: TObject);
 procedure UI_Save(AForm: TObject);
 procedure UI_About(AForm: TObject);
 procedure UI_Exit(AForm: TObject);
@@ -57,6 +59,37 @@ begin
 
   F.cbLocale.ItemIndex := Idx;
   UI_LocaleChange(F);
+end;
+
+procedure UI_Copy(AForm: TObject);
+var
+  F: TfrmMain;
+begin
+  if not (AForm is TfrmMain) then Exit;
+  F := TfrmMain(AForm);
+
+  Clipboard.AsText := BuildText(F);
+end;
+
+procedure UI_CopyPM(Sender: TObject);
+var
+  MI: TMenuItem;
+  PM: TPopupMenu;
+  PopupCtrl: TComponent;
+  S: string;
+begin
+  if not (Sender is TMenuItem) then Exit;
+  MI := TMenuItem(Sender);
+
+  PM := MI.GetParentMenu as TPopupMenu;
+  if PM = nil then Exit;
+
+  PopupCtrl := PM.PopupComponent;
+  if not (PopupCtrl is TCustomLabel) then Exit;
+
+  S := TCustomLabel(PopupCtrl).Caption;
+  if S <> '' then
+    Clipboard.AsText := S;
 end;
 
 procedure UI_Save(AForm: TObject);

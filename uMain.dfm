@@ -5,7 +5,7 @@ object frmMain: TfrmMain
   BorderStyle = bsSingle
   Caption = 'GetLocaleInfo'
   ClientHeight = 384
-  ClientWidth = 399
+  ClientWidth = 400
   Color = clBtnFace
   DoubleBuffered = True
   Font.Charset = ANSI_CHARSET
@@ -155,7 +155,7 @@ object frmMain: TfrmMain
   object grpInfo: TsGroupBox
     Left = 3
     Top = 60
-    Width = 393
+    Width = 395
     Height = 293
     TabOrder = 1
     object lblCountryR: TsLabel
@@ -213,6 +213,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
       ShowAccelChar = False
     end
     object lblLanguageW: TsLabel
@@ -221,6 +222,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblCountryCodeW: TsLabel
       Left = 118
@@ -228,6 +230,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblBCP47W: TsLabel
       Left = 118
@@ -235,6 +238,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblISO6391W: TsLabel
       Left = 118
@@ -242,6 +246,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblISO31661W: TsLabel
       Left = 118
@@ -249,6 +254,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblLanguageIDW: TsLabel
       Left = 118
@@ -256,6 +262,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblNativeDisplayNameW: TsLabel
       Left = 118
@@ -263,6 +270,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblNativeDisplayNameR: TsLabel
       Left = 16
@@ -277,6 +285,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblShortDateFormatR: TLabel
       Left = 25
@@ -291,6 +300,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblLongDateFormatR: TsLabel
       Left = 28
@@ -312,6 +322,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblCurrencySymbolR: TsLabel
       Left = 30
@@ -326,6 +337,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblCurrencyIntlSymbolW: TsLabel
       Left = 118
@@ -333,6 +345,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
     object lblCurrencyIntlSymbolR: TsLabel
       Left = 14
@@ -354,12 +367,13 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
+      PopupMenu = pMCopy
     end
   end
   object grpLocale: TsGroupBox
     Left = 3
     Top = 0
-    Width = 393
+    Width = 395
     Height = 62
     TabOrder = 0
     object lblLocale: TsLabel
@@ -381,39 +395,39 @@ object frmMain: TfrmMain
     end
   end
   object btnAbout: TsBitBtn
-    Left = 222
+    Left = 243
     Top = 359
-    Width = 84
+    Width = 75
     Height = 25
     Caption = '&About'
     ImageIndex = 1
     Images = sCharImageList
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 5
     TabStop = False
     OnClick = btnAboutClick
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object btnExit: TsBitBtn
-    Left = 312
+    Left = 323
     Top = 359
-    Width = 84
+    Width = 75
     Height = 25
     Caption = 'E&xit'
     ImageIndex = 2
     Images = sCharImageList
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 5
+    TabOrder = 6
     TabStop = False
     OnClick = btnExitClick
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object btnSave: TsBitBtn
-    Left = 132
+    Left = 83
     Top = 359
-    Width = 84
+    Width = 75
     Height = 25
     Caption = '&Save...'
     ImageIndex = 0
@@ -424,9 +438,9 @@ object frmMain: TfrmMain
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object btnDefault: TsBitBtn
-    Left = 42
+    Left = 3
     Top = 359
-    Width = 84
+    Width = 75
     Height = 25
     Caption = '&Default'
     ImageIndex = 3
@@ -434,6 +448,19 @@ object frmMain: TfrmMain
     TabOrder = 2
     TabStop = False
     OnClick = btnDefaultClick
+    SkinData.SkinSection = 'SPEEDBUTTON'
+  end
+  object btnCopy: TsBitBtn
+    Left = 163
+    Top = 359
+    Width = 75
+    Height = 25
+    Caption = '&Copy'
+    ImageIndex = 4
+    Images = sCharImageList
+    TabOrder = 4
+    TabStop = False
+    OnClick = btnCopyClick
     SkinData.SkinSection = 'SPEEDBUTTON'
   end
   object sSkinProvider: TsSkinProvider
@@ -2426,6 +2453,10 @@ object frmMain: TfrmMain
       item
         ScalingFactor = 0.800000000000000000
         Char = 61666
+      end
+      item
+        ScalingFactor = 0.800000000000000000
+        Char = 61637
       end>
     Left = 317
     Top = 167
@@ -2439,5 +2470,13 @@ object frmMain: TfrmMain
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 320
     Top = 216
+  end
+  object pMCopy: TPopupMenu
+    Left = 757
+    Top = 239
+    object pMCopyOnSelect: TMenuItem
+      Caption = '&Copy'
+      OnClick = pMCopyOnSelectClick
+    end
   end
 end

@@ -7,7 +7,7 @@ uses
   Vcl.Forms, Vcl.StdCtrls, System.Generics.Collections, sSkinManager, sSkinProvider, uLocale,
   sGroupBox, Vcl.Mask, sMaskEdit, sCustomComboEdit, sComboBox, sLabel,
   System.ImageList, Vcl.ImgList, acAlphaImageList, Vcl.Buttons, sBitBtn,
-  Vcl.Dialogs, sDialogs;
+  Vcl.Dialogs, sDialogs, Vcl.Menus;
 
 const
   mbMessage = WM_USER + 1024;
@@ -54,6 +54,9 @@ type
     lblCodePageR: TsLabel;
     lblCodePageW: TsLabel;
     btnDefault: TsBitBtn;
+    pMCopy: TPopupMenu;
+    pMCopyOnSelect: TMenuItem;
+    btnCopy: TsBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);
@@ -61,6 +64,8 @@ type
     procedure btnAboutClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnDefaultClick(Sender: TObject);
+    procedure pMCopyOnSelectClick(Sender: TObject);
+    procedure btnCopyClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,6 +111,11 @@ begin
   UI_About(Self);
 end;
 
+procedure TfrmMain.btnCopyClick(Sender: TObject);
+begin
+  UI_Copy(Self);
+end;
+
 procedure TfrmMain.btnDefaultClick(Sender: TObject);
 begin
   UI_Default(Self);
@@ -135,6 +145,11 @@ end;
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   FLocales.Free;
+end;
+
+procedure TfrmMain.pMCopyOnSelectClick(Sender: TObject);
+begin
+  UI_CopyPM(Sender);
 end;
 
 end.
