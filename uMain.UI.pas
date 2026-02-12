@@ -189,11 +189,11 @@ begin
   F.lblISO6391W.Caption := IfThen(Info.ISO6391 = '', SNotAvailable, Info.ISO6391);
   F.lblISO31661W.Caption := IfThen(Info.ISO31661 = '', SNotAvailable, Info.ISO31661);
 
-  F.lblShortDateFormatW.Caption := Info.ShortDateFormat;
-  F.lblLongDateFormatW.Caption := Info.LongDateFormat;
-  F.lblTimeFormatW.Caption := Info.TimeFormat;
-  F.lblCurrencySymbolW.Caption := Info.CurrencySymbol;
-  F.lblCurrencyIntlSymbolW.Caption := Info.CurrencyIntlSymbol;
+  F.lblShortDateFormatW.Caption := IfThen(Info.ShortDateFormat = '', SNotAvailable, Info.ShortDateFormat);
+  F.lblLongDateFormatW.Caption := IfThen(Info.LongDateFormat = '', SNotAvailable, Info.LongDateFormat);
+  F.lblTimeFormatW.Caption := IfThen(Info.TimeFormat = '', SNotAvailable, Info.TimeFormat);
+  F.lblCurrencySymbolW.Caption := IfThen(Info.CurrencySymbol = '', SNotAvailable, Info.CurrencySymbol);
+  F.lblCurrencyIntlSymbolW.Caption := IfThen(Info.CurrencyIntlSymbol = '', SNotAvailable, Info.CurrencyIntlSymbol)
 end;
 
 end.
