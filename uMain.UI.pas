@@ -195,6 +195,8 @@ begin
   if not (AForm is TfrmMain) then Exit;
   F := TfrmMain(AForm);
 
+  if F.FLocales = nil then Exit;
+
   if (F.cbLocale.ItemIndex < 0) or (F.cbLocale.ItemIndex >= F.FLocales.Count) then
     Exit;
 
