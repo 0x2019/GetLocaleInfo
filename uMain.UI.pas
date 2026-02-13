@@ -104,7 +104,8 @@ begin
 
   if not Assigned(F.sSaveDlg) then Exit;
 
-  F.sSaveDlg.FilterIndex := 1;
+  if F.sSaveDlg.FilterIndex < 1 then
+    F.sSaveDlg.FilterIndex := 1;
   F.sSaveDlg.FileName := Format('GLI_%s', [FormatDateTime('yyyymmdd_hhnnss', Now)]);
   if not F.sSaveDlg.Execute then Exit;
 
@@ -113,21 +114,25 @@ begin
   case FilterIndex of
     2: Ext := '.csv';
     3: Ext := '.json';
+    4: Ext := LowerCase(ExtractFileExt(FileName));
   else
     Ext := '.txt';
   end;
 
+  if Ext = '' then
+    Ext := '.txt';
+
   if ExtractFileExt(FileName) = '' then
     FileName := FileName + Ext
-  else
+  else if (FilterIndex <> 4) or not SameText(ExtractFileExt(FileName), Ext) then
     FileName := ChangeFileExt(FileName, Ext);
 
-  case FilterIndex of
-    2: ExportCSV(F, FileName);
-    3: ExportJSON(F, FileName);
+  if SameText(Ext, '.csv') then
+    ExportCSV(F, FileName)
+  else if SameText(Ext, '.json') then
+    ExportJSON(F, FileName)
   else
     ExportText(F, FileName);
-  end;
 end;
 
 procedure UI_About(AForm: TObject);
