@@ -115,7 +115,7 @@ begin
   Result.NLCID := LocaleNameToLCID(PChar(LocaleName), LOCALE_ALLOW_NEUTRAL_NAMES);
   Result.CodePage := GetLocaleInfoExS(LocaleName, LOCALE_IDEFAULTANSICODEPAGE);
 
-  if TryStrToInt(Result.CodePage, CodePageValue) and
+  if TryStrToInt(Result.CodePage, CodePageValue) and (CodePageValue <> 0) and
     GetCPInfoEx(CodePageValue, 0, CodePageInfo) then
     Result.CodePage := CodePageInfo.CodePageName
   else
