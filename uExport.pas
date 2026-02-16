@@ -3,7 +3,7 @@
 interface
 
 uses
-  Winapi.Windows, System.SysUtils, System.IOUtils, ShellAPI;
+  Winapi.Windows, System.SysUtils, System.IOUtils, System.JSON, ShellAPI;
 
 type
   TLocaleField = record
@@ -116,34 +116,25 @@ var
   Fields: TArray<TLocaleField>;
   I: Integer;
   KeyText: string;
-  ValueText: string;
-  Line: string;
+  JSONObj: TJSONObject;
 begin
   Result := '';
   Fields := BuildFields(AForm);
   if Length(Fields) = 0 then Exit;
 
-  Result := '{' + sLineBreak;
-  for I := 0 to High(Fields) do
-  begin
-    KeyText := StringReplace(Fields[I].Key, '\', '\\', [rfReplaceAll]);
-    KeyText := StringReplace(KeyText, '"', '\"', [rfReplaceAll]);
-    KeyText := StringReplace(KeyText, sLineBreak, '\n', [rfReplaceAll]);
-    KeyText := StringReplace(KeyText, #13, '\n', [rfReplaceAll]);
-    KeyText := StringReplace(KeyText, #10, '\n', [rfReplaceAll]);
-
-    ValueText := StringReplace(Fields[I].Value, '\', '\\', [rfReplaceAll]);
-    ValueText := StringReplace(ValueText, '"', '\"', [rfReplaceAll]);
-    ValueText := StringReplace(ValueText, sLineBreak, '\n', [rfReplaceAll]);
-    ValueText := StringReplace(ValueText, #13, '\n', [rfReplaceAll]);
-    ValueText := StringReplace(ValueText, #10, '\n', [rfReplaceAll]);
-
-    Line := '  "' + KeyText + '": "' + ValueText + '"';
-    if I < High(Fields) then
-      Line := Line + ',';
-    Result := Result + Line + sLineBreak;
+  JSONObj := TJSONObject.Create;
+  try
+    for I := 0 to High(Fields) do
+    begin
+      KeyText := Trim(Fields[I].Key);
+      if (KeyText <> '') and (KeyText[Length(KeyText)] = ':') then
+        SetLength(KeyText, Length(KeyText) - 1);
+      JSONObj.AddPair(KeyText, Fields[I].Value);
+    end;
+    Result := JSONObj.Format(2);
+  finally
+    JSONObj.Free;
   end;
-  Result := Result + '}';
 end;
 
 function BuildText(AForm: TObject): string;
