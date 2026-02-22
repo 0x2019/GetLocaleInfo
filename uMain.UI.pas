@@ -81,8 +81,8 @@ begin
   if not (Sender is TMenuItem) then Exit;
   MI := TMenuItem(Sender);
 
-  PM := MI.GetParentMenu as TPopupMenu;
-  if PM = nil then Exit;
+  if not (MI.GetParentMenu is TPopupMenu) then Exit;
+  PM := TPopupMenu(MI.GetParentMenu);
 
   PopupCtrl := PM.PopupComponent;
   if not (PopupCtrl is TCustomLabel) then Exit;
