@@ -24,7 +24,7 @@ var
 procedure UI_ChangeMessageBoxPosition(AForm: TObject);
 var
   F: TfrmMain;
-  mbHWND: LongWord;
+  mbHWND: HWND;
   mbRect: TRect;
   x, y, w, h: Integer;
 begin
