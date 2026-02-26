@@ -227,7 +227,9 @@ begin
   F.lblCodePageW.Caption := IfThen(Info.CodePage = '', SNotAvailable, Info.CodePage);
   F.lblBCP47W.Caption := IfThen(Info.BCP47 = '', SNotAvailable, Info.BCP47);
   F.lblISO6391W.Caption := IfThen(Info.ISO6391 = '', SNotAvailable, Info.ISO6391);
+  F.lblISO6392W.Caption := IfThen(Info.ISO6392 = '', SNotAvailable, Info.ISO6392);
   F.lblISO31661W.Caption := IfThen(Info.ISO31661 = '', SNotAvailable, Info.ISO31661);
+  F.lblISO31661A3W.Caption := IfThen(Info.ISO31661A3 = '', SNotAvailable, Info.ISO31661A3);
 
   F.lblShortDateFormatW.Caption := IfThen(Info.ShortDateFormat = '', SNotAvailable, Info.ShortDateFormat);
   F.lblLongDateFormatW.Caption := IfThen(Info.LongDateFormat = '', SNotAvailable, Info.LongDateFormat);

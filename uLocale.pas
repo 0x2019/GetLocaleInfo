@@ -21,7 +21,9 @@ type
     CodePage: string;
     BCP47: string;
     ISO6391: string;
+    ISO6392: string;
     ISO31661: string;
+    ISO31661A3: string;
     ShortDateFormat: string;
     LongDateFormat: string;
     TimeFormat: string;
@@ -123,7 +125,9 @@ begin
 
   Result.BCP47 := LocaleName;
   Result.ISO6391 := GetLocaleInfoExS(LocaleName, LOCALE_SISO639LANGNAME);
+  Result.ISO6392 := GetLocaleInfoExS(LocaleName, LOCALE_SISO639LANGNAME2);
   Result.ISO31661 := GetLocaleInfoExS(LocaleName, LOCALE_SISO3166CTRYNAME);
+  Result.ISO31661A3 := GetLocaleInfoExS(LocaleName, LOCALE_SISO3166CTRYNAME2);
   Result.ShortDateFormat := GetLocaleInfoExS(LocaleName, LOCALE_SSHORTDATE);
   Result.LongDateFormat := GetLocaleInfoExS(LocaleName, LOCALE_SLONGDATE);
   Result.TimeFormat := GetLocaleInfoExS(LocaleName, LOCALE_STIMEFORMAT);

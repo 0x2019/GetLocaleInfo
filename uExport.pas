@@ -27,56 +27,41 @@ uses
 function BuildFields(AForm: TObject): TArray<TLocaleField>;
 var
   F: TfrmMain;
+
+  procedure Add(const AKey, AValue: string);
+  var
+    Idx: Integer;
+  begin
+    Idx := Length(Result);
+    SetLength(Result, Idx + 1);
+    Result[Idx].Key := AKey;
+    Result[Idx].Value := AValue;
+  end;
+
 begin
-  SetLength(Result, 0);
+  Result := nil;
   if not (AForm is TfrmMain) then Exit;
   F := TfrmMain(AForm);
 
-  SetLength(Result, 15);
-  Result[0].Key := F.lblLocale.Caption;
-  Result[0].Value := F.cbLocale.Text;
+  Add(F.lblLocale.Caption, F.cbLocale.Text);
+  Add(F.lblCountryR.Caption, F.lblCountryW.Caption);
+  Add(F.lblLanguageR.Caption, F.lblLanguageW.Caption);
+  Add(F.lblCountryCodeR.Caption, F.lblCountryCodeW.Caption);
+  Add(F.lblLanguageIDR.Caption, F.lblLanguageIDW.Caption);
+  Add(F.lblCodePageR.Caption, F.lblCodePageW.Caption);
+  Add(F.lblBCP47R.Caption, F.lblBCP47W.Caption);
+  Add(F.lblISO6391R.Caption, F.lblISO6391W.Caption);
 
-  Result[1].Key := F.lblCountryR.Caption;
-  Result[1].Value := F.lblCountryW.Caption;
+  Add(F.lblISO6392R.Caption, F.lblISO6392W.Caption);
+  Add(F.lblISO31661R.Caption, F.lblISO31661W.Caption);
+  Add(F.lblISO31661A3R.Caption, F.lblISO31661A3W.Caption);
 
-  Result[2].Key := F.lblLanguageR.Caption;
-  Result[2].Value := F.lblLanguageW.Caption;
-
-  Result[3].Key := F.lblCountryCodeR.Caption;
-  Result[3].Value := F.lblCountryCodeW.Caption;
-
-  Result[4].Key := F.lblLanguageIDR.Caption;
-  Result[4].Value := F.lblLanguageIDW.Caption;
-
-  Result[5].Key := F.lblCodePageR.Caption;
-  Result[5].Value := F.lblCodePageW.Caption;
-
-  Result[6].Key := F.lblBCP47R.Caption;
-  Result[6].Value := F.lblBCP47W.Caption;
-
-  Result[7].Key := F.lblISO6391R.Caption;
-  Result[7].Value := F.lblISO6391W.Caption;
-
-  Result[8].Key := F.lblISO31661R.Caption;
-  Result[8].Value := F.lblISO31661W.Caption;
-
-  Result[9].Key := F.lblNativeDisplayNameR.Caption;
-  Result[9].Value := F.lblNativeDisplayNameW.Caption;
-
-  Result[10].Key := F.lblShortDateFormatR.Caption;
-  Result[10].Value := F.lblShortDateFormatW.Caption;
-
-  Result[11].Key := F.lblLongDateFormatR.Caption;
-  Result[11].Value := F.lblLongDateFormatW.Caption;
-
-  Result[12].Key := F.lblTimeFormatR.Caption;
-  Result[12].Value := F.lblTimeFormatW.Caption;
-
-  Result[13].Key := F.lblCurrencySymbolR.Caption;
-  Result[13].Value := F.lblCurrencySymbolW.Caption;
-
-  Result[14].Key := F.lblCurrencyIntlSymbolR.Caption;
-  Result[14].Value := F.lblCurrencyIntlSymbolW.Caption;
+  Add(F.lblNativeDisplayNameR.Caption, F.lblNativeDisplayNameW.Caption);
+  Add(F.lblShortDateFormatR.Caption, F.lblShortDateFormatW.Caption);
+  Add(F.lblLongDateFormatR.Caption, F.lblLongDateFormatW.Caption);
+  Add(F.lblTimeFormatR.Caption, F.lblTimeFormatW.Caption);
+  Add(F.lblCurrencySymbolR.Caption, F.lblCurrencySymbolW.Caption);
+  Add(F.lblCurrencyIntlSymbolR.Caption, F.lblCurrencyIntlSymbolW.Caption);
 end;
 
 function BuildCSV(AForm: TObject): string;

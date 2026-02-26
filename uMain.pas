@@ -37,7 +37,7 @@ type
     lblNativeDisplayNameW: TsLabel;
     lblNativeDisplayNameR: TsLabel;
     lblShortDateFormatW: TsLabel;
-    lblShortDateFormatR: TLabel;
+    lblShortDateFormatR: TsLabel;
     lblLongDateFormatW: TsLabel;
     lblLongDateFormatR: TsLabel;
     lblTimeFormatR: TsLabel;
@@ -57,6 +57,10 @@ type
     pMCopy: TPopupMenu;
     pMCopyOnSelect: TMenuItem;
     btnCopy: TsBitBtn;
+    lblISO31661A3R: TsLabel;
+    lblISO31661A3W: TsLabel;
+    lblISO6392R: TsLabel;
+    lblISO6392W: TsLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);

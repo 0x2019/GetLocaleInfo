@@ -4,7 +4,7 @@ object frmMain: TfrmMain
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'GetLocaleInfo'
-  ClientHeight = 384
+  ClientHeight = 420
   ClientWidth = 400
   Color = clBtnFace
   DoubleBuffered = True
@@ -156,7 +156,7 @@ object frmMain: TfrmMain
     Left = 3
     Top = 60
     Width = 395
-    Height = 293
+    Height = 330
     TabOrder = 1
     object lblCountryR: TsLabel
       Left = 69
@@ -195,7 +195,7 @@ object frmMain: TfrmMain
     end
     object lblISO31661R: TsLabel
       Left = 53
-      Top = 172
+      Top = 191
       Width = 59
       Height = 13
       Caption = 'ISO 3166-1:'
@@ -250,7 +250,7 @@ object frmMain: TfrmMain
     end
     object lblISO31661W: TsLabel
       Left = 118
-      Top = 172
+      Top = 191
       Width = 16
       Height = 13
       Caption = '%s'
@@ -282,59 +282,59 @@ object frmMain: TfrmMain
     end
     object lblShortDateFormatW: TsLabel
       Left = 118
-      Top = 191
+      Top = 229
       Width = 16
       Height = 13
       Caption = '%s'
       PopupMenu = pMCopy
     end
-    object lblShortDateFormatR: TLabel
-      Left = 25
-      Top = 191
+    object lblShortDateFormatR: TsLabel
+      Left = 24
+      Top = 229
       Width = 87
       Height = 13
       Caption = 'ShortDateFormat:'
     end
     object lblLongDateFormatW: TsLabel
       Left = 118
-      Top = 210
+      Top = 248
       Width = 16
       Height = 13
       Caption = '%s'
       PopupMenu = pMCopy
     end
     object lblLongDateFormatR: TsLabel
-      Left = 28
-      Top = 210
+      Left = 27
+      Top = 248
       Width = 84
       Height = 13
       Caption = 'LongDateFormat:'
     end
     object lblTimeFormatR: TsLabel
-      Left = 52
-      Top = 229
+      Left = 51
+      Top = 267
       Width = 60
       Height = 13
       Caption = 'TimeFormat:'
     end
     object lblTimeFormatW: TsLabel
       Left = 118
-      Top = 229
+      Top = 267
       Width = 16
       Height = 13
       Caption = '%s'
       PopupMenu = pMCopy
     end
     object lblCurrencySymbolR: TsLabel
-      Left = 30
-      Top = 248
+      Left = 29
+      Top = 286
       Width = 82
       Height = 13
       Caption = 'CurrencySymbol:'
     end
     object lblCurrencySymbolW: TsLabel
       Left = 118
-      Top = 248
+      Top = 286
       Width = 16
       Height = 13
       Caption = '%s'
@@ -342,15 +342,15 @@ object frmMain: TfrmMain
     end
     object lblCurrencyIntlSymbolW: TsLabel
       Left = 118
-      Top = 267
+      Top = 305
       Width = 16
       Height = 13
       Caption = '%s'
       PopupMenu = pMCopy
     end
     object lblCurrencyIntlSymbolR: TsLabel
-      Left = 14
-      Top = 267
+      Left = 13
+      Top = 305
       Width = 98
       Height = 13
       Caption = 'CurrencyIntlSymbol:'
@@ -365,6 +365,36 @@ object frmMain: TfrmMain
     object lblCodePageW: TsLabel
       Left = 118
       Top = 115
+      Width = 16
+      Height = 13
+      Caption = '%s'
+      PopupMenu = pMCopy
+    end
+    object lblISO31661A3R: TsLabel
+      Left = 13
+      Top = 210
+      Width = 99
+      Height = 13
+      Caption = 'ISO 3166-1 Alpha-3:'
+    end
+    object lblISO31661A3W: TsLabel
+      Left = 118
+      Top = 210
+      Width = 16
+      Height = 13
+      Caption = '%s'
+      PopupMenu = pMCopy
+    end
+    object lblISO6392R: TsLabel
+      Left = 59
+      Top = 172
+      Width = 53
+      Height = 13
+      Caption = 'ISO 639-2:'
+    end
+    object lblISO6392W: TsLabel
+      Left = 118
+      Top = 172
       Width = 16
       Height = 13
       Caption = '%s'
@@ -397,7 +427,7 @@ object frmMain: TfrmMain
   end
   object btnAbout: TsBitBtn
     Left = 243
-    Top = 359
+    Top = 395
     Width = 75
     Height = 25
     Caption = '&About'
@@ -412,7 +442,7 @@ object frmMain: TfrmMain
   end
   object btnExit: TsBitBtn
     Left = 323
-    Top = 359
+    Top = 395
     Width = 75
     Height = 25
     Caption = 'E&xit'
@@ -427,7 +457,7 @@ object frmMain: TfrmMain
   end
   object btnSave: TsBitBtn
     Left = 83
-    Top = 359
+    Top = 395
     Width = 75
     Height = 25
     Caption = '&Save...'
@@ -440,7 +470,7 @@ object frmMain: TfrmMain
   end
   object btnDefault: TsBitBtn
     Left = 3
-    Top = 359
+    Top = 395
     Width = 75
     Height = 25
     Caption = '&Default'
@@ -453,7 +483,7 @@ object frmMain: TfrmMain
   end
   object btnCopy: TsBitBtn
     Left = 163
-    Top = 359
+    Top = 395
     Width = 75
     Height = 25
     Caption = '&Copy'
