@@ -135,17 +135,13 @@ begin
     Result := Result + Fields[I].Key + ' ' + Fields[I].Value + sLineBreak;
 end;
 
-procedure ExportCSV(AForm: TObject; const FileName: string);
+procedure ExportToFile(AForm: TObject; const FileName, Content: string);
 var
   F: TfrmMain;
   Enc: TEncoding;
-  Content: string;
 begin
-  if not (AForm is TfrmMain) then Exit;
-  F := TfrmMain(AForm);
-
-  Content := BuildCSV(F);
   if Trim(Content) = '' then Exit;
+  F := TfrmMain(AForm);
 
   Enc := TUTF8Encoding.Create(False);
   try
@@ -167,74 +163,24 @@ begin
     if ShellExecute(0, 'open', PChar(FileName), nil, nil, SW_SHOWNORMAL) <= 32 then
       UI_MessageBox(F, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
   end;
+end;
+
+procedure ExportCSV(AForm: TObject; const FileName: string);
+begin
+  if AForm is TfrmMain then
+    ExportToFile(AForm, FileName, BuildCSV(AForm));
 end;
 
 procedure ExportJSON(AForm: TObject; const FileName: string);
-var
-  F: TfrmMain;
-  Enc: TEncoding;
-  Content: string;
 begin
-  if not (AForm is TfrmMain) then Exit;
-  F := TfrmMain(AForm);
-
-  Content := BuildJSON(F);
-  if Trim(Content) = '' then Exit;
-
-  Enc := TUTF8Encoding.Create(False);
-  try
-    try
-      TFile.WriteAllText(FileName, Content, Enc);
-    except
-      on E: Exception do
-      begin
-        UI_MessageBox(F, Format(SFileSaveFailMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
-        Exit;
-      end;
-    end;
-  finally
-    Enc.Free;
-  end;
-
-  if UI_ConfirmYesNo(F, Format(SFileSavedMsg, [FileName]) + sLineBreak + sLineBreak + SOpenFileMsg) then
-  begin
-    if ShellExecute(0, 'open', PChar(FileName), nil, nil, SW_SHOWNORMAL) <= 32 then
-      UI_MessageBox(F, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
-  end;
+  if AForm is TfrmMain then
+    ExportToFile(AForm, FileName, BuildJSON(AForm));
 end;
 
 procedure ExportText(AForm: TObject; const FileName: string);
-var
-  F: TfrmMain;
-  Enc: TEncoding;
-  Content: string;
 begin
-  if not (AForm is TfrmMain) then Exit;
-  F := TfrmMain(AForm);
-
-  Content := BuildText(F);
-  if Trim(Content) = '' then Exit;
-
-  Enc := TUTF8Encoding.Create(False);
-  try
-    try
-      TFile.WriteAllText(FileName, Content, Enc);
-    except
-      on E: Exception do
-      begin
-        UI_MessageBox(F, Format(SFileSaveFailMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
-        Exit;
-      end;
-    end;
-  finally
-    Enc.Free;
-  end;
-
-  if UI_ConfirmYesNo(F, Format(SFileSavedMsg, [FileName]) + sLineBreak + sLineBreak + SOpenFileMsg) then
-  begin
-    if ShellExecute(0, 'open', PChar(FileName), nil, nil, SW_SHOWNORMAL) <= 32 then
-      UI_MessageBox(F, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
-  end;
+  if AForm is TfrmMain then
+    ExportToFile(AForm, FileName, BuildText(AForm));
 end;
 
 end.
