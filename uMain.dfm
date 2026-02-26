@@ -271,6 +271,7 @@ object frmMain: TfrmMain
       Height = 13
       Caption = '%s'
       PopupMenu = pMCopy
+      ShowAccelChar = False
     end
     object lblNativeDisplayNameR: TsLabel
       Left = 16
