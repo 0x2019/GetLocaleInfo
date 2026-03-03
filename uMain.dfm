@@ -2503,6 +2503,7 @@ object frmMain: TfrmMain
     Top = 216
   end
   object pMCopy: TPopupMenu
+    OnPopup = pMCopyPopup
     Left = 757
     Top = 239
     object pMCopyOnSelect: TMenuItem

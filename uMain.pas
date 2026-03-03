@@ -4,13 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, Vcl.Controls,
-  Vcl.Forms, Vcl.StdCtrls, System.Generics.Collections, sSkinManager, sSkinProvider, uLocale,
+  Vcl.Forms, Vcl.StdCtrls, System.Generics.Collections, sSkinManager, sSkinProvider,
   sGroupBox, Vcl.Mask, sMaskEdit, sCustomComboEdit, sComboBox, sLabel,
   System.ImageList, Vcl.ImgList, acAlphaImageList, Vcl.Buttons, sBitBtn,
-  Vcl.Dialogs, sDialogs, Vcl.Menus;
+  Vcl.Dialogs, sDialogs, Vcl.Menus,
 
-const
-  mbMessage = WM_USER + 1024;
+  uForms, uMenu.Popup, uMessageBox,
+  uLocale;
 
 type
   TfrmMain = class(TForm)
@@ -70,13 +70,13 @@ type
     procedure btnDefaultClick(Sender: TObject);
     procedure pMCopyOnSelectClick(Sender: TObject);
     procedure btnCopyClick(Sender: TObject);
+    procedure pMCopyPopup(Sender: TObject);
   private
     { Private declarations }
   public
     FLocales: TList<TLocaleItem>;
     procedure ChangeMessageBoxPosition(var Msg: TMessage); message mbMessage;
     procedure DragForm(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
   end;
 
 var
@@ -87,7 +87,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain.UI, uMain.UI.Messages;
+  uAppController, uAppStrings;
 
 procedure TfrmMain.ChangeMessageBoxPosition(var Msg: TMessage);
 begin
@@ -97,63 +97,68 @@ end;
 procedure TfrmMain.DragForm(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if Button = mbLeft then
-  begin
-    ReleaseCapture;
-    SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
-  end;
-end;
-
-procedure TfrmMain.WMNCHitTest(var Msg: TWMNCHitTest);
-begin
-  inherited;
-  if Msg.Result = htClient then Msg.Result := htCaption;
+  UI_DragForm(Self, Button);
 end;
 
 procedure TfrmMain.btnAboutClick(Sender: TObject);
 begin
-  UI_About(Self);
+  UI_MessageBox(Self, Format(SAboutMsg, [APP_NAME, APP_VERSION, APP_RELEASE, APP_URL]), MB_ICONQUESTION or MB_OK);
 end;
 
 procedure TfrmMain.btnCopyClick(Sender: TObject);
 begin
-  UI_Copy(Self);
+  App_CopyLocaleInfo(Self);
 end;
 
 procedure TfrmMain.btnDefaultClick(Sender: TObject);
 begin
-  UI_Default(Self);
+  App_SetDefaultLocale(Self);
 end;
 
 procedure TfrmMain.btnExitClick(Sender: TObject);
 begin
-  UI_Exit(Self);
+  Close;
 end;
 
 procedure TfrmMain.btnSaveClick(Sender: TObject);
 begin
-  UI_Save(Self);
+  App_SaveToFile(Self);
 end;
 
 procedure TfrmMain.cbLocaleChange(Sender: TObject);
 begin
-  UI_LocaleChange(Self);
+  App_UpdateLocaleInfo(Self);
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  UI_Init(Self);
-  UI_LocaleInit(Self);
+  UI_SetMinConstraints(Self);
+  UI_SetAlwaysOnTop(Self, True);
+
+  grpLocale.OnMouseDown := DragForm;
+  grpInfo.OnMouseDown := DragForm;
+
+  App_InitLocales(Self);
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
-  FLocales.Free;
+  if Assigned(FLocales) then
+    FLocales.Free;
 end;
 
 procedure TfrmMain.pMCopyOnSelectClick(Sender: TObject);
 begin
-  UI_CopyPM(Sender);
+  UI_Menu_Popup_Copy(Sender);
+end;
+
+procedure TfrmMain.pMCopyPopup(Sender: TObject);
+var
+  Items: TPopupItems;
+begin
+  Items := Default(TPopupItems);
+  Items.Copy := pMCopyOnSelect;
+  UI_Menu_Popup_Update(Sender, Items);
 end;
 
 end.

@@ -133,10 +133,12 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uLocale.pas"/>
-        <DCCReference Include="uMain.UI.pas"/>
-        <DCCReference Include="uMain.UI.Messages.pas"/>
-        <DCCReference Include="uMain.UI.Strings.pas"/>
-        <DCCReference Include="uExport.pas"/>
+        <DCCReference Include="uAppStrings.pas"/>
+        <DCCReference Include="Common\uExport.pas"/>
+        <DCCReference Include="Common\uMessageBox.pas"/>
+        <DCCReference Include="Common\uForms.pas"/>
+        <DCCReference Include="uAppController.pas"/>
+        <DCCReference Include="Common\uMenu.Popup.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
