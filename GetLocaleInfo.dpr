@@ -4,13 +4,13 @@ uses
   Winapi.Windows,
   Vcl.Forms,
   uMain in 'uMain.pas' {frmMain},
-  uLocale in 'uLocale.pas',
-  uAppStrings in 'uAppStrings.pas',
-  uExport in 'Common\uExport.pas',
-  uMessageBox in 'Common\uMessageBox.pas',
-  uForms in 'Common\uForms.pas',
   uAppController in 'uAppController.pas',
-  uMenu.Popup in 'Common\uMenu.Popup.pas';
+  uAppStrings in 'uAppStrings.pas',
+  uLocale in 'uLocale.pas',
+  uExport in '..\Common\uExport.pas',
+  uForms in '..\Common\uForms.pas',
+  uMenu.Popup in '..\Common\uMenu.Popup.pas',
+  uMessageBox in '..\Common\uMessageBox.pas';
 
 var
   uMutex: THandle;
