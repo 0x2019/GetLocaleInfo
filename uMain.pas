@@ -102,32 +102,32 @@ end;
 
 procedure TfrmMain.btnAboutClick(Sender: TObject);
 begin
-  UI_MessageBox(Self, Format(SAboutMsg, [APP_NAME, APP_VERSION, APP_RELEASE, APP_URL]), MB_ICONQUESTION or MB_OK);
+  AppController_About(Self);
 end;
 
 procedure TfrmMain.btnCopyClick(Sender: TObject);
 begin
-  App_CopyLocaleInfo(Self);
+  AppController_Copy(Self);
 end;
 
 procedure TfrmMain.btnDefaultClick(Sender: TObject);
 begin
-  App_SetDefaultLocale(Self);
+  AppController_Default(Self);
 end;
 
 procedure TfrmMain.btnExitClick(Sender: TObject);
 begin
-  Close;
+  AppController_Exit(Self);
 end;
 
 procedure TfrmMain.btnSaveClick(Sender: TObject);
 begin
-  App_SaveToFile(Self);
+  AppController_SaveAs(Self);
 end;
 
 procedure TfrmMain.cbLocaleChange(Sender: TObject);
 begin
-  App_UpdateLocaleInfo(Self);
+  AppController_Update(Self);
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -138,7 +138,7 @@ begin
   grpLocale.OnMouseDown := DragForm;
   grpInfo.OnMouseDown := DragForm;
 
-  App_InitLocales(Self);
+  AppController_Init(Self);
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);

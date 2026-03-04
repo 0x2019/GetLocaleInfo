@@ -6,11 +6,14 @@ uses
   Winapi.Windows, System.Classes, System.Generics.Collections, System.StrUtils,
   System.SysUtils, Vcl.Forms, Vcl.Menus, Vcl.StdCtrls, ShellAPI, Clipbrd, uMain;
 
-procedure App_InitLocales(AForm: TfrmMain);
-procedure App_UpdateLocaleInfo(AForm: TfrmMain);
-procedure App_SetDefaultLocale(AForm: TfrmMain);
-procedure App_CopyLocaleInfo(AForm: TfrmMain);
-procedure App_SaveToFile(AForm: TfrmMain);
+procedure AppController_Init(AForm: TfrmMain);
+procedure AppController_Update(AForm: TfrmMain);
+
+procedure AppController_Default(AForm: TfrmMain);
+procedure AppController_Copy(AForm: TfrmMain);
+procedure AppController_SaveAs(AForm: TfrmMain);
+procedure AppController_About(AForm: TfrmMain);
+procedure AppController_Exit(AForm: TfrmMain);
 
 implementation
 
@@ -51,7 +54,7 @@ begin
   Add(AForm.lblCurrencyIntlSymbolR.Caption, AForm.lblCurrencyIntlSymbolW.Caption);
 end;
 
-procedure App_InitLocales(AForm: TfrmMain);
+procedure AppController_Init(AForm: TfrmMain);
 var
   I, Idx: Integer;
   SysLocale: string;
@@ -81,11 +84,11 @@ begin
     if Idx < 0 then Idx := 0;
 
     AForm.cbLocale.ItemIndex := Idx;
-    App_UpdateLocaleInfo(AForm);
+    AppController_Update(AForm);
   end;
 end;
 
-procedure App_UpdateLocaleInfo(AForm: TfrmMain);
+procedure AppController_Update(AForm: TfrmMain);
 var
   Info: TLocaleInfo;
   LocaleName: string;
@@ -117,7 +120,7 @@ begin
   AForm.lblCurrencyIntlSymbolW.Caption := IfThen(Info.CurrencyIntlSymbol = '', SNotAvailable, Info.CurrencyIntlSymbol);
 end;
 
-procedure App_SetDefaultLocale(AForm: TfrmMain);
+procedure AppController_Default(AForm: TfrmMain);
 var
   SysLocale: string;
   Idx: Integer;
@@ -130,16 +133,16 @@ begin
   if Idx < 0 then Idx := 0;
 
   AForm.cbLocale.ItemIndex := Idx;
-  App_UpdateLocaleInfo(AForm);
+  AppController_Update(AForm);
 end;
 
-procedure App_CopyLocaleInfo(AForm: TfrmMain);
+procedure AppController_Copy(AForm: TfrmMain);
 begin
   if AForm = nil then Exit;
   Clipboard.AsText := BuildText(GetLocaleFields(AForm));
 end;
 
-procedure App_SaveToFile(AForm: TfrmMain);
+procedure AppController_SaveAs(AForm: TfrmMain);
 var
   FileName, Ext, Content: string;
   FilterIndex: Integer;
@@ -196,6 +199,18 @@ begin
     if ShellExecute(0, 'open', PChar(FileName), nil, nil, SW_SHOWNORMAL) <= 32 then
       UI_MessageBox(AForm, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
   end;
+end;
+
+procedure AppController_About(AForm: TfrmMain);
+begin
+  if AForm = nil then Exit;
+  UI_MessageBox(AForm, Format(SAboutMsg, [APP_NAME, APP_VERSION, APP_RELEASE, APP_URL]), MB_ICONQUESTION or MB_OK);
+end;
+
+procedure AppController_Exit(AForm: TfrmMain);
+begin
+  if AForm = nil then Exit;
+  AForm.Close;
 end;
 
 end.
