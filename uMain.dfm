@@ -1,4 +1,5 @@
 object frmMain: TfrmMain
+  Tag = 99
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
@@ -153,6 +154,7 @@ object frmMain: TfrmMain
   OnDestroy = FormDestroy
   TextHeight = 13
   object grpInfo: TsGroupBox
+    Tag = 99
     Left = 3
     Top = 60
     Width = 395
@@ -402,6 +404,7 @@ object frmMain: TfrmMain
     end
   end
   object grpLocale: TsGroupBox
+    Tag = 99
     Left = 3
     Top = 0
     Width = 395

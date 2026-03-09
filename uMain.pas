@@ -76,7 +76,6 @@ type
   public
     FLocales: TList<TLocaleItem>;
     procedure ChangeMessageBoxPosition(var Msg: TMessage); message mbMessage;
-    procedure DragForm(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   end;
 
 var
@@ -92,12 +91,6 @@ uses
 procedure TfrmMain.ChangeMessageBoxPosition(var Msg: TMessage);
 begin
   UI_ChangeMessageBoxPosition(Self);
-end;
-
-procedure TfrmMain.DragForm(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  UI_DragForm(Self, Button);
 end;
 
 procedure TfrmMain.btnAboutClick(Sender: TObject);
@@ -134,9 +127,6 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   UI_SetMinConstraints(Self);
   UI_SetAlwaysOnTop(Self, True);
-
-  grpLocale.OnMouseDown := DragForm;
-  grpInfo.OnMouseDown := DragForm;
 
   AppController_Init(Self);
 end;
