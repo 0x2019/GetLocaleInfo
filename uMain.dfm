@@ -1,4 +1,5 @@
 object frmMain: TfrmMain
+  Tag = 99
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
@@ -153,12 +154,14 @@ object frmMain: TfrmMain
   OnDestroy = FormDestroy
   TextHeight = 13
   object grpInfo: TsGroupBox
+    Tag = 99
     Left = 3
     Top = 60
     Width = 395
     Height = 330
     TabOrder = 1
     object lblCountryR: TsLabel
+      Tag = 99
       Left = 69
       Top = 20
       Width = 43
@@ -166,6 +169,7 @@ object frmMain: TfrmMain
       Caption = 'Country:'
     end
     object lblLanguageR: TsLabel
+      Tag = 99
       Left = 61
       Top = 77
       Width = 51
@@ -173,6 +177,7 @@ object frmMain: TfrmMain
       Caption = 'Language:'
     end
     object lblCountryCodeR: TsLabel
+      Tag = 99
       Left = 41
       Top = 39
       Width = 71
@@ -180,6 +185,7 @@ object frmMain: TfrmMain
       Caption = 'Country Code:'
     end
     object lblLanguageIDR: TsLabel
+      Tag = 99
       Left = 47
       Top = 96
       Width = 65
@@ -187,6 +193,7 @@ object frmMain: TfrmMain
       Caption = 'Language ID:'
     end
     object lblBCP47R: TsLabel
+      Tag = 99
       Left = 74
       Top = 134
       Width = 38
@@ -194,6 +201,7 @@ object frmMain: TfrmMain
       Caption = 'BCP 47:'
     end
     object lblISO31661R: TsLabel
+      Tag = 99
       Left = 53
       Top = 191
       Width = 59
@@ -201,6 +209,7 @@ object frmMain: TfrmMain
       Caption = 'ISO 3166-1:'
     end
     object lblISO6391R: TsLabel
+      Tag = 99
       Left = 59
       Top = 153
       Width = 53
@@ -208,6 +217,7 @@ object frmMain: TfrmMain
       Caption = 'ISO 639-1:'
     end
     object lblCountryW: TsLabel
+      Tag = 99
       Left = 118
       Top = 20
       Width = 16
@@ -217,6 +227,7 @@ object frmMain: TfrmMain
       ShowAccelChar = False
     end
     object lblLanguageW: TsLabel
+      Tag = 99
       Left = 118
       Top = 77
       Width = 16
@@ -225,6 +236,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblCountryCodeW: TsLabel
+      Tag = 99
       Left = 118
       Top = 39
       Width = 16
@@ -233,6 +245,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblBCP47W: TsLabel
+      Tag = 99
       Left = 118
       Top = 134
       Width = 16
@@ -241,6 +254,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblISO6391W: TsLabel
+      Tag = 99
       Left = 118
       Top = 153
       Width = 16
@@ -249,6 +263,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblISO31661W: TsLabel
+      Tag = 99
       Left = 118
       Top = 191
       Width = 16
@@ -257,6 +272,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblLanguageIDW: TsLabel
+      Tag = 99
       Left = 118
       Top = 96
       Width = 16
@@ -265,6 +281,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblNativeDisplayNameW: TsLabel
+      Tag = 99
       Left = 118
       Top = 58
       Width = 16
@@ -274,6 +291,7 @@ object frmMain: TfrmMain
       ShowAccelChar = False
     end
     object lblNativeDisplayNameR: TsLabel
+      Tag = 99
       Left = 16
       Top = 58
       Width = 96
@@ -281,6 +299,7 @@ object frmMain: TfrmMain
       Caption = 'NativeDisplayName:'
     end
     object lblShortDateFormatW: TsLabel
+      Tag = 99
       Left = 118
       Top = 229
       Width = 16
@@ -289,6 +308,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblShortDateFormatR: TsLabel
+      Tag = 99
       Left = 24
       Top = 229
       Width = 87
@@ -296,6 +316,7 @@ object frmMain: TfrmMain
       Caption = 'ShortDateFormat:'
     end
     object lblLongDateFormatW: TsLabel
+      Tag = 99
       Left = 118
       Top = 248
       Width = 16
@@ -304,6 +325,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblLongDateFormatR: TsLabel
+      Tag = 99
       Left = 27
       Top = 248
       Width = 84
@@ -311,6 +333,7 @@ object frmMain: TfrmMain
       Caption = 'LongDateFormat:'
     end
     object lblTimeFormatR: TsLabel
+      Tag = 99
       Left = 51
       Top = 267
       Width = 60
@@ -318,6 +341,7 @@ object frmMain: TfrmMain
       Caption = 'TimeFormat:'
     end
     object lblTimeFormatW: TsLabel
+      Tag = 99
       Left = 118
       Top = 267
       Width = 16
@@ -326,6 +350,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblCurrencySymbolR: TsLabel
+      Tag = 99
       Left = 29
       Top = 286
       Width = 82
@@ -333,6 +358,7 @@ object frmMain: TfrmMain
       Caption = 'CurrencySymbol:'
     end
     object lblCurrencySymbolW: TsLabel
+      Tag = 99
       Left = 118
       Top = 286
       Width = 16
@@ -341,6 +367,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblCurrencyIntlSymbolW: TsLabel
+      Tag = 99
       Left = 118
       Top = 305
       Width = 16
@@ -349,6 +376,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblCurrencyIntlSymbolR: TsLabel
+      Tag = 99
       Left = 13
       Top = 305
       Width = 98
@@ -356,6 +384,7 @@ object frmMain: TfrmMain
       Caption = 'CurrencyIntlSymbol:'
     end
     object lblCodePageR: TsLabel
+      Tag = 99
       Left = 59
       Top = 115
       Width = 53
@@ -363,6 +392,7 @@ object frmMain: TfrmMain
       Caption = 'CodePage:'
     end
     object lblCodePageW: TsLabel
+      Tag = 99
       Left = 118
       Top = 115
       Width = 16
@@ -371,6 +401,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblISO31661A3R: TsLabel
+      Tag = 99
       Left = 13
       Top = 210
       Width = 99
@@ -378,6 +409,7 @@ object frmMain: TfrmMain
       Caption = 'ISO 3166-1 Alpha-3:'
     end
     object lblISO31661A3W: TsLabel
+      Tag = 99
       Left = 118
       Top = 210
       Width = 16
@@ -386,6 +418,7 @@ object frmMain: TfrmMain
       PopupMenu = pMCopy
     end
     object lblISO6392R: TsLabel
+      Tag = 99
       Left = 59
       Top = 172
       Width = 53
@@ -393,6 +426,7 @@ object frmMain: TfrmMain
       Caption = 'ISO 639-2:'
     end
     object lblISO6392W: TsLabel
+      Tag = 99
       Left = 118
       Top = 172
       Width = 16
@@ -402,12 +436,14 @@ object frmMain: TfrmMain
     end
   end
   object grpLocale: TsGroupBox
+    Tag = 99
     Left = 3
     Top = 0
     Width = 395
     Height = 62
     TabOrder = 0
     object lblLocale: TsLabel
+      Tag = 99
       Left = 13
       Top = 28
       Width = 34
