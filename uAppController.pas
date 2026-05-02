@@ -6,14 +6,14 @@ uses
   Winapi.Windows, System.Classes, System.Generics.Collections, System.StrUtils,
   System.SysUtils, Vcl.Forms, Vcl.Menus, Vcl.StdCtrls, ShellAPI, Clipbrd, uMain;
 
-procedure AppController_Init(AForm: TfrmMain);
-procedure AppController_Update(AForm: TfrmMain);
+procedure AppController_Init(F: TfrmMain);
+procedure AppController_Update(F: TfrmMain);
 
-procedure AppController_Default(AForm: TfrmMain);
-procedure AppController_Copy(AForm: TfrmMain);
-procedure AppController_SaveAs(AForm: TfrmMain);
-procedure AppController_About(AForm: TfrmMain);
-procedure AppController_Exit(AForm: TfrmMain);
+procedure AppController_Default(F: TfrmMain);
+procedure AppController_Copy(F: TfrmMain);
+procedure AppController_SaveAs(F: TfrmMain);
+procedure AppController_About(F: TfrmMain);
+procedure AppController_Exit(F: TfrmMain);
 
 implementation
 
@@ -21,7 +21,7 @@ uses
   uExport, uMessageBox,
   uAppStrings, uLocale;
 
-function GetLocaleFields(AForm: TfrmMain): TArray<TExportField>;
+function GetLocaleFields(F: TfrmMain): TArray<TExportField>;
 var
   Idx: Integer;
   procedure Add(const AKey, AValue: string);
@@ -33,132 +33,132 @@ var
   end;
 begin
   Result := nil;
-  if AForm = nil then Exit;
+  if F = nil then Exit;
 
-  Add(AForm.lblLocale.Caption, AForm.cbLocale.Text);
-  Add(AForm.lblCountryR.Caption, AForm.lblCountryW.Caption);
-  Add(AForm.lblLanguageR.Caption, AForm.lblLanguageW.Caption);
-  Add(AForm.lblCountryCodeR.Caption, AForm.lblCountryCodeW.Caption);
-  Add(AForm.lblLanguageIDR.Caption, AForm.lblLanguageIDW.Caption);
-  Add(AForm.lblCodePageR.Caption, AForm.lblCodePageW.Caption);
-  Add(AForm.lblBCP47R.Caption, AForm.lblBCP47W.Caption);
-  Add(AForm.lblISO6391R.Caption, AForm.lblISO6391W.Caption);
-  Add(AForm.lblISO6392R.Caption, AForm.lblISO6392W.Caption);
-  Add(AForm.lblISO31661R.Caption, AForm.lblISO31661W.Caption);
-  Add(AForm.lblISO31661A3R.Caption, AForm.lblISO31661A3W.Caption);
-  Add(AForm.lblNativeDisplayNameR.Caption, AForm.lblNativeDisplayNameW.Caption);
-  Add(AForm.lblShortDateFormatR.Caption, AForm.lblShortDateFormatW.Caption);
-  Add(AForm.lblLongDateFormatR.Caption, AForm.lblLongDateFormatW.Caption);
-  Add(AForm.lblTimeFormatR.Caption, AForm.lblTimeFormatW.Caption);
-  Add(AForm.lblCurrencySymbolR.Caption, AForm.lblCurrencySymbolW.Caption);
-  Add(AForm.lblCurrencyIntlSymbolR.Caption, AForm.lblCurrencyIntlSymbolW.Caption);
+  Add(F.lblLocale.Caption, F.cbLocale.Text);
+  Add(F.lblCountryR.Caption, F.lblCountryW.Caption);
+  Add(F.lblLanguageR.Caption, F.lblLanguageW.Caption);
+  Add(F.lblCountryCodeR.Caption, F.lblCountryCodeW.Caption);
+  Add(F.lblLanguageIDR.Caption, F.lblLanguageIDW.Caption);
+  Add(F.lblCodePageR.Caption, F.lblCodePageW.Caption);
+  Add(F.lblBCP47R.Caption, F.lblBCP47W.Caption);
+  Add(F.lblISO6391R.Caption, F.lblISO6391W.Caption);
+  Add(F.lblISO6392R.Caption, F.lblISO6392W.Caption);
+  Add(F.lblISO31661R.Caption, F.lblISO31661W.Caption);
+  Add(F.lblISO31661A3R.Caption, F.lblISO31661A3W.Caption);
+  Add(F.lblNativeDisplayNameR.Caption, F.lblNativeDisplayNameW.Caption);
+  Add(F.lblShortDateFormatR.Caption, F.lblShortDateFormatW.Caption);
+  Add(F.lblLongDateFormatR.Caption, F.lblLongDateFormatW.Caption);
+  Add(F.lblTimeFormatR.Caption, F.lblTimeFormatW.Caption);
+  Add(F.lblCurrencySymbolR.Caption, F.lblCurrencySymbolW.Caption);
+  Add(F.lblCurrencyIntlSymbolR.Caption, F.lblCurrencyIntlSymbolW.Caption);
 end;
 
-procedure AppController_Init(AForm: TfrmMain);
+procedure AppController_Init(F: TfrmMain);
 var
   I, Idx: Integer;
   SysLocale: string;
 begin
-  if AForm = nil then Exit;
+  if F = nil then Exit;
 
-  if AForm.FLocales = nil then
-    AForm.FLocales := TList<TLocaleItem>.Create
+  if F.FLocales = nil then
+    F.FLocales := TList<TLocaleItem>.Create
   else
-    AForm.FLocales.Clear;
+    F.FLocales.Clear;
 
-  LoadSystemLocalesSorted(AForm.FLocales);
+  LoadSystemLocalesSorted(F.FLocales);
 
-  AForm.cbLocale.Items.BeginUpdate;
+  F.cbLocale.Items.BeginUpdate;
   try
-    AForm.cbLocale.Clear;
-    for I := 0 to AForm.FLocales.Count - 1 do
-      AForm.cbLocale.Items.Add(AForm.FLocales[I].Display);
+    F.cbLocale.Clear;
+    for I := 0 to F.FLocales.Count - 1 do
+      F.cbLocale.Items.Add(F.FLocales[I].Display);
   finally
-    AForm.cbLocale.Items.EndUpdate;
+    F.cbLocale.Items.EndUpdate;
   end;
 
-  if AForm.cbLocale.Items.Count > 0 then
+  if F.cbLocale.Items.Count > 0 then
   begin
     SysLocale := GetUserDefaultLocaleNameS;
-    Idx := FindLocaleIndex(AForm.FLocales, SysLocale);
+    Idx := FindLocaleIndex(F.FLocales, SysLocale);
     if Idx < 0 then Idx := 0;
 
-    AForm.cbLocale.ItemIndex := Idx;
-    AppController_Update(AForm);
+    F.cbLocale.ItemIndex := Idx;
+    AppController_Update(F);
   end;
 end;
 
-procedure AppController_Update(AForm: TfrmMain);
+procedure AppController_Update(F: TfrmMain);
 var
   Info: TLocaleInfo;
   LocaleName: string;
 begin
-  if AForm = nil then Exit;
-  if AForm.FLocales = nil then Exit;
-  if (AForm.cbLocale.ItemIndex < 0) or (AForm.cbLocale.ItemIndex >= AForm.FLocales.Count) then Exit;
+  if F = nil then Exit;
+  if F.FLocales = nil then Exit;
+  if (F.cbLocale.ItemIndex < 0) or (F.cbLocale.ItemIndex >= F.FLocales.Count) then Exit;
 
-  LocaleName := AForm.FLocales[AForm.cbLocale.ItemIndex].Name;
+  LocaleName := F.FLocales[F.cbLocale.ItemIndex].Name;
   Info := GetLocaleInfo(LocaleName);
 
-  AForm.lblCountryW.Caption := Info.CountryName;
-  AForm.lblCountryCodeW.Caption := Info.CountryCode;
-  AForm.lblLanguageW.Caption := Info.LanguageName;
-  AForm.lblNativeDisplayNameW.Caption := Info.NativeDisplayName;
+  F.lblCountryW.Caption := Info.CountryName;
+  F.lblCountryCodeW.Caption := Info.CountryCode;
+  F.lblLanguageW.Caption := Info.LanguageName;
+  F.lblNativeDisplayNameW.Caption := Info.NativeDisplayName;
 
-  AForm.lblLanguageIDW.Caption := IfThen(Info.NLCID = 0, SNotAvailable, Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)]));
-  AForm.lblCodePageW.Caption := IfThen(Info.CodePage = '', SNotAvailable, Info.CodePage);
-  AForm.lblBCP47W.Caption := IfThen(Info.BCP47 = '', SNotAvailable, Info.BCP47);
-  AForm.lblISO6391W.Caption := IfThen(Info.ISO6391 = '', SNotAvailable, Info.ISO6391);
-  AForm.lblISO6392W.Caption := IfThen(Info.ISO6392 = '', SNotAvailable, Info.ISO6392);
-  AForm.lblISO31661W.Caption := IfThen(Info.ISO31661 = '', SNotAvailable, Info.ISO31661);
-  AForm.lblISO31661A3W.Caption := IfThen(Info.ISO31661A3 = '', SNotAvailable, Info.ISO31661A3);
+  F.lblLanguageIDW.Caption := IfThen(Info.NLCID = 0, SNotAvailable, Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)]));
+  F.lblCodePageW.Caption := IfThen(Info.CodePage = '', SNotAvailable, Info.CodePage);
+  F.lblBCP47W.Caption := IfThen(Info.BCP47 = '', SNotAvailable, Info.BCP47);
+  F.lblISO6391W.Caption := IfThen(Info.ISO6391 = '', SNotAvailable, Info.ISO6391);
+  F.lblISO6392W.Caption := IfThen(Info.ISO6392 = '', SNotAvailable, Info.ISO6392);
+  F.lblISO31661W.Caption := IfThen(Info.ISO31661 = '', SNotAvailable, Info.ISO31661);
+  F.lblISO31661A3W.Caption := IfThen(Info.ISO31661A3 = '', SNotAvailable, Info.ISO31661A3);
 
-  AForm.lblShortDateFormatW.Caption := IfThen(Info.ShortDateFormat = '', SNotAvailable, Info.ShortDateFormat);
-  AForm.lblLongDateFormatW.Caption := IfThen(Info.LongDateFormat = '', SNotAvailable, Info.LongDateFormat);
-  AForm.lblTimeFormatW.Caption := IfThen(Info.TimeFormat = '', SNotAvailable, Info.TimeFormat);
-  AForm.lblCurrencySymbolW.Caption := IfThen(Info.CurrencySymbol = '', SNotAvailable, Info.CurrencySymbol);
-  AForm.lblCurrencyIntlSymbolW.Caption := IfThen(Info.CurrencyIntlSymbol = '', SNotAvailable, Info.CurrencyIntlSymbol);
+  F.lblShortDateFormatW.Caption := IfThen(Info.ShortDateFormat = '', SNotAvailable, Info.ShortDateFormat);
+  F.lblLongDateFormatW.Caption := IfThen(Info.LongDateFormat = '', SNotAvailable, Info.LongDateFormat);
+  F.lblTimeFormatW.Caption := IfThen(Info.TimeFormat = '', SNotAvailable, Info.TimeFormat);
+  F.lblCurrencySymbolW.Caption := IfThen(Info.CurrencySymbol = '', SNotAvailable, Info.CurrencySymbol);
+  F.lblCurrencyIntlSymbolW.Caption := IfThen(Info.CurrencyIntlSymbol = '', SNotAvailable, Info.CurrencyIntlSymbol);
 end;
 
-procedure AppController_Default(AForm: TfrmMain);
+procedure AppController_Default(F: TfrmMain);
 var
   SysLocale: string;
   Idx: Integer;
 begin
-  if AForm = nil then Exit;
-  if (AForm.FLocales = nil) or (AForm.FLocales.Count = 0) then Exit;
+  if F = nil then Exit;
+  if (F.FLocales = nil) or (F.FLocales.Count = 0) then Exit;
 
   SysLocale := GetUserDefaultLocaleNameS;
-  Idx := FindLocaleIndex(AForm.FLocales, SysLocale);
+  Idx := FindLocaleIndex(F.FLocales, SysLocale);
   if Idx < 0 then Idx := 0;
 
-  AForm.cbLocale.ItemIndex := Idx;
-  AppController_Update(AForm);
+  F.cbLocale.ItemIndex := Idx;
+  AppController_Update(F);
 end;
 
-procedure AppController_Copy(AForm: TfrmMain);
+procedure AppController_Copy(F: TfrmMain);
 begin
-  if AForm = nil then Exit;
-  Clipboard.AsText := BuildText(GetLocaleFields(AForm));
+  if F = nil then Exit;
+  Clipboard.AsText := BuildText(GetLocaleFields(F));
 end;
 
-procedure AppController_SaveAs(AForm: TfrmMain);
+procedure AppController_SaveAs(F: TfrmMain);
 var
   FileName, Ext, Content: string;
   FilterIndex: Integer;
   Fields: TArray<TExportField>;
 begin
-  if AForm = nil then Exit;
-  if not Assigned(AForm.sSaveDlg) then Exit;
+  if F = nil then Exit;
+  if not Assigned(F.sSaveDlg) then Exit;
 
-  if AForm.sSaveDlg.FilterIndex < 1 then
-    AForm.sSaveDlg.FilterIndex := 1;
-  AForm.sSaveDlg.FileName := Format('GLI_%s', [FormatDateTime('yyyymmdd_hhnnss', Now)]);
+  if F.sSaveDlg.FilterIndex < 1 then
+    F.sSaveDlg.FilterIndex := 1;
+  F.sSaveDlg.FileName := Format('GLI_%s', [FormatDateTime('yyyymmdd_hhnnss', Now)]);
 
-  if not AForm.sSaveDlg.Execute then Exit;
+  if not F.sSaveDlg.Execute then Exit;
 
-  FileName := AForm.sSaveDlg.FileName;
-  FilterIndex := AForm.sSaveDlg.FilterIndex;
+  FileName := F.sSaveDlg.FileName;
+  FilterIndex := F.sSaveDlg.FilterIndex;
 
   case FilterIndex of
     2: Ext := '.csv';
@@ -175,7 +175,7 @@ begin
   else if (FilterIndex <> 4) or not SameText(ExtractFileExt(FileName), Ext) then
     FileName := ChangeFileExt(FileName, Ext);
 
-  Fields := GetLocaleFields(AForm);
+  Fields := GetLocaleFields(F);
 
   if SameText(Ext, '.csv') then
     Content := BuildCSV(Fields)
@@ -189,28 +189,28 @@ begin
   except
     on E: Exception do
     begin
-      UI_MessageBox(AForm, Format(SFileSaveFailMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
+      UI_MessageBox(F, Format(SFileSaveFailMsg, [FileName, E.Message]), MB_ICONERROR or MB_OK);
       Exit;
     end;
   end;
 
-  if UI_ConfirmYesNo(AForm, Format(SFileSavedMsg, [FileName]) + sLineBreak + sLineBreak + SOpenFileMsg) then
+  if UI_ConfirmYesNo(F, Format(SFileSavedMsg, [FileName]) + sLineBreak + sLineBreak + SOpenFileMsg) then
   begin
     if ShellExecute(0, 'open', PChar(FileName), nil, nil, SW_SHOWNORMAL) <= 32 then
-      UI_MessageBox(AForm, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
+      UI_MessageBox(F, SOpenFileFailMsg, MB_ICONWARNING or MB_OK);
   end;
 end;
 
-procedure AppController_About(AForm: TfrmMain);
+procedure AppController_About(F: TfrmMain);
 begin
-  if AForm = nil then Exit;
-  UI_MessageBox(AForm, Format(SAboutMsg, [APP_NAME, APP_VERSION, APP_RELEASE, APP_URL]), MB_ICONQUESTION or MB_OK);
+  if F = nil then Exit;
+  UI_MessageBox(F, Format(SAboutMsg, [APP_NAME, APP_VERSION, APP_RELEASE, APP_URL]), MB_ICONQUESTION or MB_OK);
 end;
 
-procedure AppController_Exit(AForm: TfrmMain);
+procedure AppController_Exit(F: TfrmMain);
 begin
-  if AForm = nil then Exit;
-  AForm.Close;
+  if F = nil then Exit;
+  F.Close;
 end;
 
 end.
