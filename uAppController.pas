@@ -139,7 +139,12 @@ end;
 procedure AppController_Copy(F: TfrmMain);
 begin
   if F = nil then Exit;
-  Clipboard.AsText := BuildText(GetLocaleFields(F));
+  try
+    Clipboard.AsText := BuildText(GetLocaleFields(F));
+  except
+    on E: Exception do
+      UI_MessageBox(F, Format(SClipboardCopyErrMsg, [E.Message]), MB_ICONWARNING or MB_OK);
+  end;
 end;
 
 procedure AppController_SaveAs(F: TfrmMain);

@@ -54,8 +54,8 @@ type
     lblCodePageR: TsLabel;
     lblCodePageW: TsLabel;
     btnDefault: TsBitBtn;
-    pMCopy: TPopupMenu;
-    pMCopyOnSelect: TMenuItem;
+    pmCopy: TPopupMenu;
+    pmiCopyOnSelect: TMenuItem;
     btnCopy: TsBitBtn;
     lblISO31661A3R: TsLabel;
     lblISO31661A3W: TsLabel;
@@ -68,9 +68,9 @@ type
     procedure btnAboutClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnDefaultClick(Sender: TObject);
-    procedure pMCopyOnSelectClick(Sender: TObject);
+    procedure pmiCopyOnSelectClick(Sender: TObject);
     procedure btnCopyClick(Sender: TObject);
-    procedure pMCopyPopup(Sender: TObject);
+    procedure pmCopyPopup(Sender: TObject);
   private
     { Private declarations }
   public
@@ -138,17 +138,22 @@ begin
     FLocales.Free;
 end;
 
-procedure TfrmMain.pMCopyOnSelectClick(Sender: TObject);
+procedure TfrmMain.pmiCopyOnSelectClick(Sender: TObject);
 begin
-  UI_Menu_Popup_Copy(Sender);
+  try
+    UI_Menu_Popup_Copy(Sender);
+  except
+    on E: Exception do
+      UI_MessageBox(Self, Format(SClipboardCopyErrMsg, [E.Message]), MB_ICONWARNING or MB_OK);
+  end;
 end;
 
-procedure TfrmMain.pMCopyPopup(Sender: TObject);
+procedure TfrmMain.pmCopyPopup(Sender: TObject);
 var
   Items: TPopupItems;
 begin
   Items := Default(TPopupItems);
-  Items.Copy := pMCopyOnSelect;
+  Items.Copy := pmiCopyOnSelect;
   UI_Menu_Popup_Update(Sender, Items);
 end;
 

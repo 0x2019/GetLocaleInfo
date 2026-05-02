@@ -16,6 +16,8 @@ resourcestring
   SOpenFileMsg                        = 'Would you like to open the file now?';
   SOpenFileFailMsg                    = 'Failed to open the file.';
 
+  SClipboardCopyErrMsg                = 'Unable to copy to the clipboard.' + sLineBreak + '%s';
+
   SAboutMsg                           = '%s %s' + sLineBreak +
                                         'c0ded by 龍, written in Delphi.' + sLineBreak + sLineBreak +
                                         'Release Date: %s' + sLineBreak +

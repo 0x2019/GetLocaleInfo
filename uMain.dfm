@@ -223,7 +223,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
       ShowAccelChar = False
     end
     object lblLanguageW: TsLabel
@@ -233,7 +233,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblCountryCodeW: TsLabel
       Tag = 99
@@ -242,7 +242,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblBCP47W: TsLabel
       Tag = 99
@@ -251,7 +251,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblISO6391W: TsLabel
       Tag = 99
@@ -260,7 +260,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblISO31661W: TsLabel
       Tag = 99
@@ -269,7 +269,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblLanguageIDW: TsLabel
       Tag = 99
@@ -278,7 +278,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblNativeDisplayNameW: TsLabel
       Tag = 99
@@ -287,7 +287,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
       ShowAccelChar = False
     end
     object lblNativeDisplayNameR: TsLabel
@@ -305,7 +305,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblShortDateFormatR: TsLabel
       Tag = 99
@@ -322,7 +322,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblLongDateFormatR: TsLabel
       Tag = 99
@@ -347,7 +347,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblCurrencySymbolR: TsLabel
       Tag = 99
@@ -364,7 +364,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblCurrencyIntlSymbolW: TsLabel
       Tag = 99
@@ -373,7 +373,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblCurrencyIntlSymbolR: TsLabel
       Tag = 99
@@ -398,7 +398,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblISO31661A3R: TsLabel
       Tag = 99
@@ -415,7 +415,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
     object lblISO6392R: TsLabel
       Tag = 99
@@ -432,7 +432,7 @@ object frmMain: TfrmMain
       Width = 16
       Height = 13
       Caption = '%s'
-      PopupMenu = pMCopy
+      PopupMenu = pmCopy
     end
   end
   object grpLocale: TsGroupBox
@@ -2538,13 +2538,13 @@ object frmMain: TfrmMain
     Left = 320
     Top = 216
   end
-  object pMCopy: TPopupMenu
-    OnPopup = pMCopyPopup
+  object pmCopy: TPopupMenu
+    OnPopup = pmCopyPopup
     Left = 757
     Top = 239
-    object pMCopyOnSelect: TMenuItem
+    object pmiCopyOnSelect: TMenuItem
       Caption = '&Copy'
-      OnClick = pMCopyOnSelectClick
+      OnClick = pmiCopyOnSelectClick
     end
   end
 end
