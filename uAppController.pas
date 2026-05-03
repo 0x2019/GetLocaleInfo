@@ -71,8 +71,7 @@ end;
 
 procedure AppController_Init(F: TfrmMain);
 var
-  I, Idx: Integer;
-  SysLocale: string;
+  I: Integer;
 begin
   if F = nil then Exit;
 
@@ -93,14 +92,7 @@ begin
   end;
 
   if F.cbLocale.Items.Count > 0 then
-  begin
-    SysLocale := GetUserDefaultLocaleNameS;
-    Idx := FindLocaleIndex(F.FLocales, SysLocale);
-    if Idx < 0 then Idx := 0;
-
-    F.cbLocale.ItemIndex := Idx;
-    AppController_Update(F);
-  end;
+    AppController_Default(F);
 end;
 
 procedure AppController_Update(F: TfrmMain);
