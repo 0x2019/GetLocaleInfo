@@ -12,7 +12,7 @@ Windows 로케일 정보를 확인할 수 있는 프로그램입니다.
 English
 
 ## 📷 Screenshot
-![GetLocaleInfo Screenshot](https://i.imgur.com/Os3bZTu.png)
+![GetLocaleInfo Screenshot](https://i.imgur.com/zqsYywf.png)
 
 ## 📥 Download
 [Windows](https://github.com/0x2019/GetLocaleInfo/releases)
