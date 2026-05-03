@@ -4,8 +4,8 @@ interface
 
 resourcestring
   APP_NAME                            = 'GetLocaleInfo';
-  APP_VERSION                         = 'v1.0.0.0';
-  APP_RELEASE                         = 'January 21, 2026';
+  APP_VERSION                         = 'v1.0.0.1';
+  APP_RELEASE                         = 'May 03, 2026';
   APP_URL                             = 'https://github.com/0x2019/GetLocaleInfo';
 
   SNotAvailable                       = 'N/A';
