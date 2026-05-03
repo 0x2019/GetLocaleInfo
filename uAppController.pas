@@ -93,6 +93,9 @@ begin
 
   if F.cbLocale.Items.Count > 0 then
     AppController_Default(F);
+
+  if (F.sSkinManager <> nil) and (F.pmCopy <> nil) then
+    F.sSkinManager.SkinableMenus.HookPopupMenu(F.pmCopy, True);
 end;
 
 procedure AppController_Update(F: TfrmMain);
