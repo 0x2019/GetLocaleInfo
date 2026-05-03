@@ -54,6 +54,21 @@ begin
   Add(F.lblCurrencyIntlSymbolR.Caption, F.lblCurrencyIntlSymbolW.Caption);
 end;
 
+procedure SetLocaleValue(ALabel: TCustomLabel; const Value: string);
+var
+  TextValue: string;
+begin
+  if ALabel = nil then
+    Exit;
+
+  TextValue := Value;
+  if Trim(TextValue) = '' then
+    TextValue := SNotAvailable;
+
+  ALabel.Caption := TextValue;
+  ALabel.Enabled := not SameText(TextValue, SNotAvailable);
+end;
+
 procedure AppController_Init(F: TfrmMain);
 var
   I, Idx: Integer;
@@ -100,24 +115,24 @@ begin
   LocaleName := F.FLocales[F.cbLocale.ItemIndex].Name;
   Info := GetLocaleInfo(LocaleName);
 
-  F.lblCountryW.Caption := Info.CountryName;
-  F.lblCountryCodeW.Caption := Info.CountryCode;
-  F.lblLanguageW.Caption := Info.LanguageName;
-  F.lblNativeDisplayNameW.Caption := Info.NativeDisplayName;
+  SetLocaleValue(F.lblCountryW, Info.CountryName);
+  SetLocaleValue(F.lblCountryCodeW, Info.CountryCode);
+  SetLocaleValue(F.lblLanguageW, Info.LanguageName);
+  SetLocaleValue(F.lblNativeDisplayNameW, Info.NativeDisplayName);
 
-  F.lblLanguageIDW.Caption := IfThen(Info.NLCID = 0, SNotAvailable, Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)]));
-  F.lblCodePageW.Caption := IfThen(Info.CodePage = '', SNotAvailable, Info.CodePage);
-  F.lblBCP47W.Caption := IfThen(Info.BCP47 = '', SNotAvailable, Info.BCP47);
-  F.lblISO6391W.Caption := IfThen(Info.ISO6391 = '', SNotAvailable, Info.ISO6391);
-  F.lblISO6392W.Caption := IfThen(Info.ISO6392 = '', SNotAvailable, Info.ISO6392);
-  F.lblISO31661W.Caption := IfThen(Info.ISO31661 = '', SNotAvailable, Info.ISO31661);
-  F.lblISO31661A3W.Caption := IfThen(Info.ISO31661A3 = '', SNotAvailable, Info.ISO31661A3);
+  SetLocaleValue(F.lblLanguageIDW, IfThen(Info.NLCID = 0, SNotAvailable, Format('%d (0x%.8x)', [Info.NLCID, Cardinal(Info.NLCID)])));
+  SetLocaleValue(F.lblCodePageW, Info.CodePage);
+  SetLocaleValue(F.lblBCP47W, Info.BCP47);
+  SetLocaleValue(F.lblISO6391W, Info.ISO6391);
+  SetLocaleValue(F.lblISO6392W, Info.ISO6392);
+  SetLocaleValue(F.lblISO31661W, Info.ISO31661);
+  SetLocaleValue(F.lblISO31661A3W, Info.ISO31661A3);
 
-  F.lblShortDateFormatW.Caption := IfThen(Info.ShortDateFormat = '', SNotAvailable, Info.ShortDateFormat);
-  F.lblLongDateFormatW.Caption := IfThen(Info.LongDateFormat = '', SNotAvailable, Info.LongDateFormat);
-  F.lblTimeFormatW.Caption := IfThen(Info.TimeFormat = '', SNotAvailable, Info.TimeFormat);
-  F.lblCurrencySymbolW.Caption := IfThen(Info.CurrencySymbol = '', SNotAvailable, Info.CurrencySymbol);
-  F.lblCurrencyIntlSymbolW.Caption := IfThen(Info.CurrencyIntlSymbol = '', SNotAvailable, Info.CurrencyIntlSymbol);
+  SetLocaleValue(F.lblShortDateFormatW, Info.ShortDateFormat);
+  SetLocaleValue(F.lblLongDateFormatW, Info.LongDateFormat);
+  SetLocaleValue(F.lblTimeFormatW, Info.TimeFormat);
+  SetLocaleValue(F.lblCurrencySymbolW, Info.CurrencySymbol);
+  SetLocaleValue(F.lblCurrencyIntlSymbolW, Info.CurrencyIntlSymbol);
 end;
 
 procedure AppController_Default(F: TfrmMain);
